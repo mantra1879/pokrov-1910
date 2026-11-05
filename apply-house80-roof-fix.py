@@ -26,3 +26,8 @@ p.write_text(s)
 city = root / "city.js"
 c = city.read_text().replace("local,hippedRoof,windowAt", "local,hippedRoof,gableRoof,windowAt")
 city.write_text(c)
+app = root / "app.js"
+lines = app.read_text().splitlines()
+index = next(i for i, line in enumerate(lines) if "  }catch(error){console.error(error);" in line)
+lines[index] = "  }catch(error){console.error(error);$('loading').hidden=true;$('error').hidden=false;const reason=error instanceof Error?(error.name+': '+error.message):String(error);$('error-message').textContent='Сбой 3D-сцены: '+reason+'. Проверьте доступность WebGL 2 и поддержку аппаратного ускорения.';}"
+app.write_text(chr(10).join(lines)+chr(10))
