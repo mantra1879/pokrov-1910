@@ -25,6 +25,10 @@ jobs:
         uses: actions/checkout@v6
       - name: Extract static site package
         run: unzip -q Pokrov-1910-GitHub-Pages-Ready.zip -d _bundle
+      - name: Apply photographed facade repair
+        run: |
+          base64 --decode Pokrov-1910-model-fix-2026-11-05.zip.b64 > /tmp/pokrov-model-fix.zip
+          unzip -oq /tmp/pokrov-model-fix.zip -d _bundle/Pokrov-1910-Public-Site
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
