@@ -15,7 +15,7 @@ replacement='''  function roofPart(id,lx,lz,w,d,rise=2.7){
       }
       const major=Math.max(w,d),minor=Math.min(w,d),ridgeAngle=Math.atan2(-edge.dz,edge.dx);
       const pitch={lenina47:2.2,lenina80:2.7,lenina86:2.15,lenina106:2.35}[id]||rise;
-      if(id==='lenina80')gableRoof(q[0],q[1],minor+.2,major+.2,p.sp.h+.5,pitch,roof,Math.atan2(edge.dx,edge.dz));
+      if(id==='lenina80')gableRoof(q[0],q[1],major+.2,minor+.2,p.sp.h+.5,pitch,roof,ridgeAngle);
       else hippedRoof(q[0],q[1],major+.2,minor+.2,p.sp.h+.5,pitch,roof,ridgeAngle);
     }else hippedRoof(q[0],q[1],w+.8,d+.8,p.sp.h+.5,rise,id==='cheburov'?palette.roof3:roof,p.a);
     setPart('details');
