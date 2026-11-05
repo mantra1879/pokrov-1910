@@ -29,6 +29,8 @@ jobs:
         run: |
           base64 --decode Pokrov-1910-model-fix-2026-11-05.zip.b64 > /tmp/pokrov-model-fix.zip
           unzip -oq /tmp/pokrov-model-fix.zip -d _bundle/Pokrov-1910-Public-Site
+      - name: Align house 80 roof to its facade
+        run: python3 apply-house80-roof-fix.py
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
