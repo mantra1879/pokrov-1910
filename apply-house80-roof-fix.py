@@ -22,6 +22,7 @@ replacement = '''  function roofPart(id,lx,lz,w,d,rise=2.7){
 s = s[:start] + replacement + s[end:]
 s = s.replace("    const attic=local(p.x,p.z,p.a,0,-p.d*.12);", "")
 s = s.replace("    lbox(attic[0],attic[1],p.a,0,p.sp.h+.58,0,p.w*.54,.8,p.d*.34,p.sp.color);", "")
+s = s.replace("export function buildHeritage({setBuilding,setPart,push,box,lbox,local,hippedRoof,windowAt,arch", "export function buildHeritage({setBuilding,setPart,push,box,lbox,local,hippedRoof,gableRoof,windowAt,arch")
 p.write_text(s)
 city = root / "city.js"
 c = city.read_text().replace("local,hippedRoof,windowAt", "local,hippedRoof,gableRoof,windowAt")
