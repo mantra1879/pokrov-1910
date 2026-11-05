@@ -22,10 +22,15 @@ replacement = '''  function roofPart(id,lx,lz,w,d,rise=2.7){
 s = s[:start] + replacement + s[end:]
 s = s.replace("    const attic=local(p.x,p.z,p.a,0,-p.d*.12);", "")
 s = s.replace("    lbox(attic[0],attic[1],p.a,0,p.sp.h+.58,0,p.w*.54,.8,p.d*.34,p.sp.color);", "")
-s = s.replace("hippedRoof,windowAt", "hippedRoof,gableRoof,windowAt")
+sig = "export function buildHeritage({"
+if sig not in s: raise ValueError("buildHeritage signature not found")
+if "gableRoof," not in s[s.index(sig):s.index("}",s.index(sig))]: s = s.replace(sig, sig+"gableRoof,", 1)
 p.write_text(s)
 city = root / "city.js"
-c = city.read_text().replace("local,hippedRoof,windowAt", "local,hippedRoof,gableRoof,windowAt")
+c = city.read_text()
+call = "buildHeritage({"
+if call not in c: raise ValueError("buildHeritage call not found")
+if "gableRoof," not in c[c.index(call):c.index("}",c.index(call))]: c = c.replace(call,call+"gableRoof,",1)
 city.write_text(c)
 app = root / "app.js"
 lines = app.read_text().splitlines()
